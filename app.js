@@ -4,7 +4,7 @@ const dns = require("node:dns");
 dns.setServers(["8.8.8.8", "1.1.1.1"]);
 
 const mongoose = require("mongoose");
-const Card = require("./models/Card");
+const Card = require("./models/card");
 
 mongoose.connect(process.env.MONGO_URI)
   .then(async () => {
