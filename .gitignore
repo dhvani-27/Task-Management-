@@ -1,0 +1,34 @@
+# Ignore Node modules in both frontEnd and backEnd
+**/node_modules/
+
+# Ignore local environment files
+**/.env
+**/.env.*
+
+# Ignore build and cache outputs
+**/dist/
+**/build/
+**/.cache/
+**/.vite/
+
+# Ignore lockfiles if you prefer not to commit them from nested folders
+# (keep only the root lockfile if you choose)
+# **/package-lock.json
+# **/yarn.lock
+
+# Ignore log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Ignore OS files
+.DS_Store
+Thumbs.db
+
+# Ignore editor files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
