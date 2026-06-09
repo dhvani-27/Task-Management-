@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import axios from "axios";
+import { loginUser } from "../services/authService";
 
 import {
   loginSchema,
@@ -18,18 +18,9 @@ const Login = () => {
 
   const onSubmit = async (data: LoginFormData) => {
     try {
-      const response = await axios.post(
-        "http://localhost:5000/api/auth/login",
-        data
-      );
-
-      localStorage.setItem(
-        "token",
-        response.data.token
-      );
-
+      const response = await loginUser(data);
+      localStorage.setItem("token", response.data.token);
       alert("Login Successful");
-      console.log(response.data);
     } catch (error: any) {
       alert(
         error?.response?.data?.message ||
@@ -41,37 +32,61 @@ const Login = () => {
   return (
     <div
       style={{
-        maxWidth: "400px",
-        margin: "50px auto",
+        maxWidth: 450,
+        margin: "60px auto",
+        padding: 24,
+        background: "#fff",
+        borderRadius: 16,
+        boxShadow: "0 16px 40px rgba(0,0,0,0.08)",
       }}
     >
-      <h2>Login</h2>
+      <h2 style={{ marginBottom: 24 }}>Login</h2>
 
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
-          <label>Email</label>
-
+        <div style={{ marginBottom: 20 }}>
+          <label
+            htmlFor="email"
+            style={{ display: "block", marginBottom: 8 }}
+          >
+            Email
+          </label>
           <input
+            id="email"
             type="email"
             {...register("email")}
-            placeholder="Enter email"
+            placeholder="Enter your email"
+            style={{
+              width: "100%",
+              padding: 12,
+              borderRadius: 10,
+              border: "1px solid #d1d5db",
+            }}
           />
-
-          <p style={{ color: "red" }}>
+          <p style={{ color: "#dc2626", marginTop: 8 }}>
             {errors.email?.message}
           </p>
         </div>
 
-        <div>
-          <label>Password</label>
-
+        <div style={{ marginBottom: 24 }}>
+          <label
+            htmlFor="password"
+            style={{ display: "block", marginBottom: 8 }}
+          >
+            Password
+          </label>
           <input
+            id="password"
             type="password"
             {...register("password")}
-            placeholder="Enter password"
+            placeholder="Enter your password"
+            style={{
+              width: "100%",
+              padding: 12,
+              borderRadius: 10,
+              border: "1px solid #d1d5db",
+            }}
           />
-
-          <p style={{ color: "red" }}>
+          <p style={{ color: "#dc2626", marginTop: 8 }}>
             {errors.password?.message}
           </p>
         </div>
@@ -79,10 +94,18 @@ const Login = () => {
         <button
           type="submit"
           disabled={isSubmitting}
+          style={{
+            width: "100%",
+            padding: 14,
+            borderRadius: 10,
+            border: "none",
+            background: "#1d4ed8",
+            color: "white",
+            fontWeight: 600,
+            cursor: isSubmitting ? "not-allowed" : "pointer",
+          }}
         >
-          {isSubmitting
-            ? "Logging in..."
-            : "Login"}
+          {isSubmitting ? "Logging in..." : "Login"}
         </button>
       </form>
     </div>
