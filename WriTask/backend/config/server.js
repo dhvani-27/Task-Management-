@@ -6,7 +6,6 @@ const connectDB = require('./db');
 const authRoutes = require('../routes/authRoutes');
 
 dotenv.config({ path: path.resolve(__dirname, '../.env') });
-console.log('loaded MONGO_URI:', process.env.MONGO_URI);
 // Fallback: directly parse the backend .env file if dotenv didn't set variables
 if (!process.env.MONGO_URI) {
   try {
@@ -17,7 +16,6 @@ if (!process.env.MONGO_URI) {
     Object.keys(parsed).forEach((k) => {
       if (!process.env[k]) process.env[k] = parsed[k];
     });
-    console.log('fallback loaded MONGO_URI:', process.env.MONGO_URI);
   } catch (e) {
     console.error('fallback .env load failed:', e.message);
   }
@@ -26,7 +24,7 @@ if (!process.env.MONGO_URI) {
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-app.use(cors({ origin: 'http://localhost:5173' }));
+app.use(cors({ origin: true }));
 app.use(express.json());
 app.use('/api/auth', authRoutes);
 
