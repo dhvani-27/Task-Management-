@@ -23,7 +23,7 @@ const Login = ({ onLoginSuccess }: LoginProps) => {
   const onSubmit = async (data: LoginFormData) => {
     try {
       const response = await loginUser(data);
-      localStorage.setItem("token", response.data.token);
+      localStorage.setItem("token", response.token);
       if (onLoginSuccess) {
         onLoginSuccess();
       }

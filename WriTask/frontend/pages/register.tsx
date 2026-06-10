@@ -4,9 +4,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { signupUser, verifyOTP } from "../services/authService";
 
 import {
-  loginSchema,
-  LoginFormData,
-} from "../schemas/loginSchema";
+  signupSchema,
+  SignupFormData,
+} from "../schemas/signupSchema";
 
 const Register = ({ onSwitch }: { onSwitch: () => void }) => {
   const [otpSent, setOtpSent] = useState(false);
@@ -18,11 +18,11 @@ const Register = ({ onSwitch }: { onSwitch: () => void }) => {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm<LoginFormData>({
-    resolver: zodResolver(loginSchema),
+  } = useForm<SignupFormData>({
+    resolver: zodResolver(signupSchema),
   });
 
-  const onSubmit = async (data: LoginFormData) => {
+  const onSubmit = async (data: SignupFormData) => {
     try {
       const response = await signupUser(data);
       alert(response.data.message || "Registration successful. Check your email for OTP.");
@@ -74,29 +74,53 @@ const Register = ({ onSwitch }: { onSwitch: () => void }) => {
 
       {!otpSent ? (
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div style={{ marginBottom: 20 }}>
-            <label
-              htmlFor="email"
-              style={{ display: "block", marginBottom: 8 }}
-            >
-              Email
-            </label>
-            <input
-              id="email"
-              type="email"
-              {...register("email")}
-              placeholder="Enter your email"
-              style={{
-                width: "100%",
-                padding: 12,
-                borderRadius: 10,
-                border: "1px solid #d1d5db",
-              }}
-            />
-            <p style={{ color: "#dc2626", marginTop: 8 }}>
-              {errors.email?.message}
-            </p>
-          </div>
+        <div style={{ marginBottom: 20 }}>
+          <label
+            htmlFor="username"
+            style={{ display: "block", marginBottom: 8 }}
+          >
+            Username
+          </label>
+          <input
+            id="username"
+            type="text"
+            {...register("username")}
+            placeholder="Enter your username"
+            style={{
+              width: "100%",
+              padding: 12,
+              borderRadius: 10,
+              border: "1px solid #d1d5db",
+            }}
+          />
+          <p style={{ color: "#dc2626", marginTop: 8 }}>
+            {errors.username?.message}
+          </p>
+        </div>
+
+        <div style={{ marginBottom: 20 }}>
+          <label
+            htmlFor="email"
+            style={{ display: "block", marginBottom: 8 }}
+          >
+            Email
+          </label>
+          <input
+            id="email"
+            type="email"
+            {...register("email")}
+            placeholder="Enter your email"
+            style={{
+              width: "100%",
+              padding: 12,
+              borderRadius: 10,
+              border: "1px solid #d1d5db",
+            }}
+          />
+          <p style={{ color: "#dc2626", marginTop: 8 }}>
+            {errors.email?.message}
+          </p>
+        </div>
 
           <div style={{ marginBottom: 24 }}>
             <label
