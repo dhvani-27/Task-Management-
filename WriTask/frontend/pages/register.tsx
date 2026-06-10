@@ -2,11 +2,15 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signupUser, verifyOTP } from "../services/authService";
+import { z } from "zod";
 
-import {
-  signupSchema,
-  SignupFormData,
-} from "../schemas/signupSchema";
+const signupSchema = z.object({
+  username: z.string().min(3, "Username must be at least 3 characters"),
+  email: z.string().email("Please enter a valid email"),
+  password: z.string().min(6, "Password must be at least 6 characters"),
+});
+
+type SignupFormData = z.infer<typeof signupSchema>;
 
 const Register = ({ onSwitch }: { onSwitch: () => void }) => {
   const [otpSent, setOtpSent] = useState(false);

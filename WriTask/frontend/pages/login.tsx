@@ -6,7 +6,7 @@ import {
   loginSchema,
   LoginFormData,
 } from "../schemas/loginSchema";
-import Sidebar from "../components/common/Sidebar";
+import Sidebar from "../components/sidebar/Sidebar";
 
 interface LoginProps {
   onLoginSuccess?: () => void;
