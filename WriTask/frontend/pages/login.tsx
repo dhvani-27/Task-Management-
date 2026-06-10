@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { loginUser } from "../services/authService";
+import { loginUser } from "../services/authApi";
 
 import {
   loginSchema,
@@ -31,7 +31,7 @@ const Login = ({ onLoginSuccess }: LoginProps) => {
     } catch (error: any) {
       alert(
         error?.response?.data?.message ||
-          "Login Failed"
+        "Login Failed"
       );
     }
   };

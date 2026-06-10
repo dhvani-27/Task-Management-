@@ -8,7 +8,8 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    setIsLoggedIn(Boolean(localStorage.getItem("token")));
+    localStorage.removeItem("token");
+    setIsLoggedIn(false);
   }, []);
 
   const handleLoginSuccess = () => {
