@@ -6,6 +6,7 @@ import {
   loginSchema,
   LoginFormData,
 } from "../schemas/loginSchema";
+import Sidebar from "../components/sidebar/Sidebar";
 
 interface LoginProps {
   onLoginSuccess?: () => void;
@@ -35,6 +36,20 @@ const Login = ({ onLoginSuccess }: LoginProps) => {
       );
     }
   };
+
+  const showSidebar = typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('showSidebar') === '1';
+
+  if (showSidebar) {
+    return (
+      <div style={{display: 'flex'}}>
+        <Sidebar />
+        <div style={{flex: 1, padding: 24}}>
+          <h2>Sidebar Demo</h2>
+          <p>The sidebar is rendered for development demo because <code>?showSidebar=1</code> is present.</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div
