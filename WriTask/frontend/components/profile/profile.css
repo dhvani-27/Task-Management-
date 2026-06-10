@@ -1,0 +1,15 @@
+.profile-menu{
+ width:250px;
+ background:white;
+ border-radius:12px;
+ box-shadow:0 4px 15px rgba(0,0,0,.1);
+}
+
+.profile-menu div{
+ padding:15px;
+ cursor:pointer;
+}
+
+.profile-menu div:hover{
+ background:#F8FAFC;
+}

@@ -7,7 +7,11 @@ import {
   LoginFormData,
 } from "../schemas/loginSchema";
 
-const Login = () => {
+interface LoginProps {
+  onLoginSuccess?: () => void;
+}
+
+const Login = ({ onLoginSuccess }: LoginProps) => {
   const {
     register,
     handleSubmit,
@@ -20,6 +24,9 @@ const Login = () => {
     try {
       const response = await loginUser(data);
       localStorage.setItem("token", response.data.token);
+      if (onLoginSuccess) {
+        onLoginSuccess();
+      }
       alert("Login Successful");
     } catch (error: any) {
       alert(
@@ -40,7 +47,16 @@ const Login = () => {
         boxShadow: "0 16px 40px rgba(0,0,0,0.08)",
       }}
     >
-      <h2 style={{ marginBottom: 24 }}>Login</h2>
+      <div style={{ textAlign: "center", marginBottom: 20 }}>
+        <img
+          src="/images/logo.png"
+          alt="WriTask Logo"
+          width={120}
+          height={120}
+          style={{ display: "inline-block", marginBottom: 16 }}
+        />
+      </div>
+      <h2 style={{ marginBottom: 24, textAlign: "center" }}>Login</h2>
 
       <form onSubmit={handleSubmit(onSubmit)}>
         <div style={{ marginBottom: 20 }}>
