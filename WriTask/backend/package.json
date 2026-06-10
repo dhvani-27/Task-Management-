@@ -3,8 +3,8 @@
   "private": true,
   "type": "commonjs",
   "scripts": {
-    "dev": "nodemon config/server.js",
-    "start": "node config/server.js"
+    "dev": "nodemon login/server.js",
+    "start": "node login/server.js"
   },
   "dependencies": {
     "bcryptjs": "^3.0.3",
